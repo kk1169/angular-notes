@@ -155,10 +155,13 @@ Route::middleware('auth:sanctum')->group( function () {
     // Logout
     Route::get('logout', [AuthController::class, 'logout']);
 
-    // Blog Resources
-    Route::resource('blogs', BlogController::class);
-});
+    // Users
+    Route::resource('users', UserController::class);
 
+
+    // Blog Resources
+    Route::resource('articles', ArticleController::class);
+});
 ```
 Now, Article crud opertaions
 ```
@@ -407,4 +410,40 @@ class UserController extends BaseController
     }
 }
 ```
+File Uploading
+```
+public function update_profile(Request $request){
+
+    $photo = $request->file("avatar");
+    if (isset($photo) && $photo != "") {
+        $filename = time() . "_" . $photo->getClientOriginalName();
+        $upload_path =
+            public_path() .
+            "/uploads/user_photos/" .
+            Auth::user()->id .
+            "/";
+        if (!is_dir($upload_path)) {
+            mkdir($upload_path, 0777, true);
+        }
+        $photo->move($upload_path, $filename);
+        $photo_url = url(
+            "/uploads/user_photos/" .
+            Auth::user()->id .
+                "/" .
+                $filename
+        );
+        $user = User::where(
+            "id",
+            "=",
+            Auth::user()->id
+        )->first();
+        $user->image = $photo_url;
+        $user->save();
+    }
+    //
+
+    return $this->sendResponse(new UserResource($user), 'Profile updated successfully!');
+}
+```
+
 
