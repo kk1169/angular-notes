@@ -410,7 +410,7 @@ class UserController extends BaseController
     }
 }
 ```
-File Uploading
+## File Uploading
 ```
 public function update_profile(Request $request){
 
