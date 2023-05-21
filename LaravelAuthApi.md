@@ -24,7 +24,7 @@ composer require laravel/sanctum
 
 Register the sanctum middleware into the api array inside the app/Http/Kernel.php file
 
-```
+```php
 protected $middlewareGroups = [
 ...
 ...
@@ -44,7 +44,7 @@ php artisan migrate
 ```
 Create BaseController file for managing response
 
-```
+```php
 <?php
 
 namespace App\Http\Controllers\API;

@@ -1,0 +1,7 @@
+# SQL COMMANDS
+
+**CREATE DATABASE**
+```
+CREATE DATABASE <database_name>
+```
+
