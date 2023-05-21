@@ -32,3 +32,32 @@ SELECT * FROM <table_name>;
 ```
 UPDATE users SET mobile='7744558855',email='' WHERE id=2;
 ```
+**DELETE QUERY**
+```
+DELETE FROM users where id=4
+```
+
+## SELECT EXAMPLES
+
+**CONCAT(column1,' ',column2)**
+```
+SELECT firstName, lastName, concat(firstName,' ',lastName) as fullName 
+FROM employees;
+```
+**ORDER BY**
+```
+SELECT * FROM employees ORDER BY employeeNumber DESC;
+```
+**ORDER BY FIELD**
+```
+SELECT orderNumber, status FROM orders
+ORDER BY field(status, 'Cancelled', 'Resolved','Shipped','In Process','On Hold','Disputed')
+```
+**FOREIGN KEY**
+```
+CREATE TABLE test_app.orders(
+	orderId int(11) PRIMARY KEY auto_increment,
+    orderName varchar(255),
+    user_id int(11), FOREIGN KEY (user_id) REFERENCES users(id) 
+)
+```
